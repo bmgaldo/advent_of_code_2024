@@ -22,6 +22,7 @@ find_xmas_right_to_left = function(input){
   right_to_left = right_to_left[ right_to_left > (-1) ]
   return(right_to_left)
 }
+
 n_xmas = n_xmas + find_xmas_left_to_right(input) |> length()
 n_xmas = n_xmas + find_xmas_right_to_left(input) |> length()
 print(n_xmas) 
@@ -77,7 +78,7 @@ for(i in 1:(len)){
   j = len - i + 1 
   # lower diagonal indices + main diagonal
   lower_diag_indices = seq(i,i+(j-1)*(len+1),length.out=j)
- 
+  
   diag_char = rotated_char_mat[lower_diag_indices] |> paste0(collapse="")
   n_front = find_xmas_left_to_right(diag_char) |> length()
   n_backwards = find_xmas_right_to_left(diag_char) |> length()
@@ -95,3 +96,43 @@ for(i in 1:(len)){
 }
 
 print(n_xmas) 
+
+find_mas_left_to_right = function(input){
+  left_to_right = lapply(input,function(x){
+    gregexpr(pattern=regex("([M][A][S])"),text=x)}) |> unlist() 
+  left_to_right = left_to_right[ left_to_right > (-1) ]
+  return(left_to_right)
+}
+find_mas_right_to_left = function(input){
+  right_to_left = lapply(input,function(x){
+    gregexpr(pattern=regex("([S][A][M])"),text=x)}) |> unlist() 
+  right_to_left = right_to_left[ right_to_left > (-1) ]
+  return(right_to_left)
+}
+
+
+
+
+n_crosses=0
+for(i in 1:len){
+  for(j in 1:len){
+    if( i<=(len-2) & j<=(len-2) ){
+      mat <- char_matrix[i:(i+2),j:(j+2)] 
+      if(mat[5]=="A"){
+        diag1 <- mat[c(1,5,9)]|> 
+          paste0(collapse = "")
+        diag2 <- mat[c(3,5,7)] |> 
+          paste0(collapse = "")
+        n_mas = length(find_mas_right_to_left(diag1)) + 
+          length(find_mas_right_to_left(diag2)) + 
+          length(find_mas_left_to_right(diag1)) + 
+          length(find_mas_left_to_right(diag2))
+        if(n_mas == 2){
+          n_crosses = n_crosses + 1
+        }
+      }
+    }
+  }
+}
+
+print(n_crosses)
