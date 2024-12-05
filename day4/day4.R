@@ -72,7 +72,7 @@ for(i in 1:(len)){
 #######################
 # find XMAS diagonal (bottom left to top right) 
 #######################
-# same as above, just net to rotate algorithm 90 degrees 
+# same as above, just after rotating matrix 90 degrees 
 for(i in 1:(len)){
   j = len - i + 1 
   # lower diagonal indices + main diagonal
@@ -102,13 +102,13 @@ find_mas_left_to_right = function(input){
   left_to_right = left_to_right[ left_to_right > (-1) ]
   return(left_to_right)
 }
+
 find_mas_right_to_left = function(input){
   right_to_left = lapply(input,function(x){
     gregexpr(pattern=regex("([S][A][M])"),text=x)}) |> unlist() 
   right_to_left = right_to_left[ right_to_left > (-1) ]
   return(right_to_left)
 }
-
 
 n_crosses = 0 
 for(i in 1:len){
