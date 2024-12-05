@@ -25,7 +25,7 @@ find_xmas_right_to_left = function(input){
 
 n_xmas = n_xmas + find_xmas_left_to_right(input) |> length()
 n_xmas = n_xmas + find_xmas_right_to_left(input) |> length()
-print(n_xmas) 
+ 
 #######################
 # find XMAS up and down
 #######################
@@ -45,7 +45,7 @@ input_rotated <- apply(rotated_char_mat,MARGIN = 1,\(x)paste0(x,collapse = ""))
 # calculate
 n_xmas = n_xmas + find_xmas_left_to_right(input_rotated) |> length()
 n_xmas = n_xmas + find_xmas_right_to_left(input_rotated) |> length()
-print(n_xmas) 
+
 #######################
 # find XMAS diagonal (top left to bottom right) 
 #######################
@@ -68,7 +68,6 @@ for(i in 1:(len)){
     n_xmas = n_xmas + n_front + n_backwards
   }
 }
-print(n_xmas) 
 
 #######################
 # find XMAS diagonal (bottom left to top right) 
@@ -111,9 +110,7 @@ find_mas_right_to_left = function(input){
 }
 
 
-
-
-n_crosses=0
+n_crosses = 0 
 for(i in 1:len){
   for(j in 1:len){
     if( i<=(len-2) & j<=(len-2) ){
@@ -135,4 +132,4 @@ for(i in 1:len){
   }
 }
 
-print(n_crosses)
+print(n_crosses) 
